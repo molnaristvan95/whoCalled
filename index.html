@@ -1,0 +1,134 @@
+   <!DOCTYPE html>
+   <html>
+   <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ki hivott 5in1</title>
+    <script type="text/javascript">
+     const create = (c) => {
+      return document.createElement(c);
+     },
+     append = (par, chil) => {
+      return par.appendChild(chil);
+     },
+     node = (variable, t) => {
+      let txt = document.createTextNode(t);
+      variable.appendChild(txt);
+      return;
+     },
+     event = (target, triger, func) => {
+      return target.setAttribute(triger, func);
+     },
+     substr = (a, b, c) => {
+      if (Number.isInteger(b) && Number.isInteger(c)) {
+       return a.substring(b, c);
+      } else {
+       return a.substring(1);
+      }
+     },
+     $ = (e) => {
+      let elem;
+      if (e[0] == '#') {
+       let x = substr(e);
+       elem = document.getElementById(x);
+      } else if (e[0] == '.') {
+       let x = substr(e);
+       elem = document.getElementsByClassName(x);
+      } else if (e[0] == 'n') {
+       let x = substr(e);
+       elem = document.getElementsByName(x);
+      } else if (e[0] == 't') {
+       let x = substr(e);
+       elem = document.getElementsByTagName(x);
+      }
+      return elem;
+     },
+     html = (el, h) => {
+      if (!h) {
+       return el.innerHTML;
+      } else {
+       return el.innerHTML = h;
+      }
+     },
+     css = (el, c) => {
+      let separ = c.split(';');
+      return el.style[separ[0]] = separ[1];
+     };
+    </script>
+    <style rel="stylesheet" type="text/css">
+body>*:not(script){
+display:block;
+width:100%;
+font-size:1.5rem;
+}
+body{
+padding-top:45vh;
+background:pink;
+}
+#perm{
+background:green;
+transform:scaleY(2) translateY(-100%);
+}
+    </style>
+   </head>
+   <body>
+<label>tel: </label>
+<input id="tel" type="number" placeholder="70 333 22 22">
+<button id="btn" type="button">Search </button>
+<button type="button" id="perm">Permission require click!</button>
+    <script type="text/javascript">
+let o = {
+'06' : ['https://www.kihivott.hu/telefonszam/'],
+'36' : [
+'https://www.telefonszamkereses.hu/szam/',
+
+'https://www.telefontudakozo.hu/szam/',
+
+'https://www.kikeresett.hu/szam/'
+
+],
+check : function () { 
+if ($('#tel').value[0] == '0' || $('#tel').value[1] == '6' || $('#tel').value.length > 9 || $('#tel').value.length < 6 ) {
+alert('Error 06 / 36 input or too long / short');
+return;
+}
+let clear = $('#tel').value.replace(/ /g, ''),
+six = '06'+clear,
+tree = '36'+clear;
+
+for (let i of this['36']) {
+let ww = window.open(i+tree, '_blank');
+setTimeout(function () {
+ww.close();
+ }, 120000);
+}
+
+for (let i of this['06']) {
+let w = window.open(i+six, '_blank');
+setTimeout(function () {
+w.close();
+ }, 120000);
+}
+
+}
+
+};
+$('#btn').onclick = function () { 
+o['check']();
+};
+
+$('#perm').onclick = function () {
+let x = window.open('https://google.com','_blank'),
+y = window.open('https://google.com','_blank');
+setTimeout(
+function () {
+x.close();
+y.close();
+ }, 4000
+);
+$('#perm').style.display = 'none';
+ }
+    </script>
+   </body>
+  </html>
+  
